@@ -24,35 +24,59 @@
         "tvModeConfig": "Modalità TV",
         "fullscreenConfig": "Modalità schermo intero",
         "exit": "Esci",
-
         "pluginSettings": "Impostazioni plugin",
         "fsHideOriginal": "Nascondi pulsante Schermo Intero di Premium",
         "fsHideOriginalDescription": "Nascondi il pulsante Schermo Intero degli utenti **Spotify Premium**. Richiede un riavvio.",
         "language": "Lingua",
         "autoLaunch": {
-            "setting": "Apri automaticamente (all'apertura di Spotify)",
-            "description": "**Limitazione:** La finestra di Spotify non può entrare in modalità schermo intero durante l'avvio all'accensione.",
+            "setting": "Avvio automatico (all'avvio di Spotify)",
+            "description": "**Limitazione:** La finestra di Spotify non può passare alla modalità a schermo intero durante l'avvio automatico.",
             "never": "Mai (Predefinito)",
-            "default": "Apri in modalità default",
-            "tvmode": "Apri in modalità TV",
-            "lastused": "Apri con l'ultima modalità usata"
+            "default": "Apri modalità predefinita",
+            "tvmode": "Apri modalità TV",
+            "lastused": "Ultima modalità usata"
+        },
+        "activationTypes": {
+            "setting": "Metodi di attivazione",
+            "description": "Scegli i metodi che vuoi usare per attivare il plugin. Tasti <kbd>F</kbd> e <kbd>T</kbd>, o pulsanti nella barra superiore e inferiore.",
+            "both": "Pulsanti e scorciatoie da tastiera",
+            "btns": "Solo pulsanti",
+            "keys": "Solo scorciatoie da tastiera"
+        },
+        "buttonActivation": {
+            "setting": "Personalizza pulsanti di attivazione",
+            "description": "Scegli i pulsanti che vuoi per l'attivazione, nella barra superiore (*Modalità TV*) e nella barra inferiore (*Modalità predefinita*).",
+            "both": "Pulsanti per entrambe le modalità",
+            "tv": "Pulsante solo per Modalità TV",
+            "def": "Pulsante solo per Modalità predefinita"
+        },
+        "keyActivation": {
+            "setting": "Personalizza tasti di attivazione",
+            "description": "Scegli i tasti che vuoi per l'attivazione. <kbd>F</kbd> per *Modalità predefinita* e <kbd>T</kbd> per *Modalità TV*",
+            "both": "Tasti per entrambe le modalità",
+            "tv": "Tasto solo per Modalità TV",
+            "def": "Tasto solo per Modalità predefinita"
         },
         "lyricsHeader": "Impostazioni testo",
         "lyrics": "Mostra testo",
-        "lyricsDescription": ["**Nota:** Serve [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) per usare questa funzione.","Segui le instruzioni nel link per installare l'app."],
+        "lyricsDescription": [
+            "**Nota:** Serve [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) per usare questa funzione.",
+            "Segui le instruzioni nel link per installare l'app."
+        ],
         "lyricsAlignment": {
             "setting": "Allineamento testo",
             "left": "Sinistra",
             "center": "Centro",
             "right": "Destra"
         },
+        "autoHideLyrics": "Nascondi automaticamente il testo (quando non disponibile)",
         "lyricsAnimationTempo": "Durata animazione testo",
-
         "generalHeader": "Impostazioni generali",
         "progressBar": "Barra di avanzamento",
         "playerControls": "Controlli player",
         "trimTitle": "Accorcia titolo",
         "trimTitleUpNext": "Accorcia titolo nel visualizzatore coda",
+        "trimAlbum": "Accorcia album",
         "showAlbum": {
             "setting": "Mostra album",
             "never": "Mai",
@@ -63,15 +87,24 @@
         "icons": "Icone",
         "songChangeAnimation": "Animazione cambio brano",
         "fullscreen": "Schermo intero",
-
         "extraHeader": "Funzionalità aggiuntive",
         "backgroundChoice": {
             "setting": "Scelta sfondo",
+            "description": [
+                "**Nuovo:** Prova l'opzione **copertina album animata**!",
+                "**Attenzione:** Sembra bello ma potrebbe richiedere molte risorse ed è sperimentale."
+            ],
             "dynamicColor": "Tinta unita dinamica",
             "staticColor": "Tinta unita fissa (scegli sotto)",
             "artwork": "Immagine dell'album",
+            "animatedArt": "Copertina album animata (Sperimentale)",
             "artist": "Immagine dell'artista"
         },
+        "sidebarQueue": "Abilita coda nella barra laterale (sostituisce il pulsante del testo)",
+        "sidebarQueueDescription": [
+            "Attiva/disattiva la coda nella barra laterale con <kbd>Q</kbd> o il pulsante nella barra extra.",
+            "Assicurati di abilitare l'impostazione nelle funzionalità sperimentali."
+        ],
         "extraControls": "Controlli aggiuntivi",
         "upnextDisplay": "Mostra il brano in coda",
         "contextDisplay": {
@@ -82,14 +115,23 @@
         },
         "volumeDisplay": {
             "setting": "Mostra barra volume",
-            "description": ["In modalità `smart` la barra del volume sarà mostrata quando:","  - muovi il mouse nella parte sinistra dello schermo."," - il volume viene cambiato."],
+            "description": [
+                "In modalità `smart` la barra del volume sarà mostrata quando:",
+                "  - muovi il mouse nella parte sinistra dello schermo.",
+                " - il volume viene cambiato."
+            ],
             "always": "Sempre",
             "never": "Mai",
             "smart": "Smart"
         },
-
+        "overviewDisplay": {
+            "setting": "Visualizzazione panoramica",
+            "description": "Mostra una breve scheda panoramica con tempo e azioni di controllo"
+        },
         "appearanceHeader": "Avanzato/Aspetto",
         "appearanceSubHeader": "Cambia solo se sai cosa stai facendo!",
+        "backgroundHeader": "Modifiche sfondo",
+        "backgroundSubHeader": "Viene fornito con valori predefiniti ragionevoli, *(Modifica solo se sai cosa stai facendo!)*",
         "backgroundColor": {
             "setting": "Colore su sfondo tinta unita",
             "vibrant": "Vivace",
@@ -108,7 +150,10 @@
             "always": "Sempre",
             "auto": "Automatico (basato su sfondo)"
         },
+        "verticalMonitorSupport": "Supporto monitor verticale",
+        "verticalMonitorSupportDescription": "Abilita questo se hai una configurazione monitor verticale. Il testo verrà mostrato in basso quando l'altezza della finestra è maggiore della larghezza.",
         "backAnimationTime": "Durata animazione sfondo",
+        "animationSpeed": "⭐ Velocità animazione (per sfondo animato)",
         "upnextScroll": {
             "setting": "Scorrimento Up next",
             "mq": "Scorrimento",
@@ -117,9 +162,7 @@
         "upnextTime": "Tempo per mostrare Up next",
         "backgroundBlur": "Sfocamento sfondo",
         "backgroundBrightness": "Luminosità sfondo",
-
         "aboutHeader": "A proposito",
-
         "configReset": "Resetta configurazione",
         "reload": "Ricarica client"
     },

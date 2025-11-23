@@ -24,26 +24,59 @@
         "tvModeConfig": "TV Modu ayarları",
         "fullscreenConfig": "Tam ekran modu ayarları",
         "exit": "Çık",
-
         "pluginSettings": "Eklenti ayarları",
         "fsHideOriginal": "Tam ekran tuşunu gizle(Spotify Premium kullanıcıları için)",
+        "fsHideOriginalDescription": "Tam ekran tuşunu gizle(Spotify Premium kullanıcıları için)",
         "language": "Dil",
-
+        "autoLaunch": {
+            "setting": "Otomatik Başlat (Spotify başlangıcında)",
+            "description": "**Sınırlama:** Spotify penceresi başlangıçta otomatik olarak tam ekrana geçemez.",
+            "never": "Asla (Varsayılan)",
+            "default": "Varsayılan Modu Aç",
+            "tvmode": "TV Modunu Aç",
+            "lastused": "Son Kullanılan Mod"
+        },
+        "activationTypes": {
+            "setting": "Etkinleştirme Yöntemleri",
+            "description": "Eklentiyi etkinleştirmek için kullanmak istediğiniz yöntemleri seçin. <kbd>F</kbd> ve <kbd>T</kbd> tuşları veya üst ve alt çubuktaki düğmeler.",
+            "both": "Düğmeler ve Klavye Kısayolları",
+            "btns": "Yalnızca Düğmeler",
+            "keys": "Yalnızca Klavye Kısayolları"
+        },
+        "buttonActivation": {
+            "setting": "Etkinleştirme Düğmelerini Özelleştir",
+            "description": "Etkinleştirme için istediğiniz düğmeleri seçin, üst çubukta (*TV Modu*) ve alt çubukta (*Varsayılan Mod*).",
+            "both": "Her iki mod için düğmeler",
+            "tv": "Yalnızca TV Modu için düğme",
+            "def": "Yalnızca Varsayılan Mod için düğme"
+        },
+        "keyActivation": {
+            "setting": "Etkinleştirme Tuşlarını Özelleştir",
+            "description": "Etkinleştirme için istediğiniz tuşları seçin. *Varsayılan Mod* için <kbd>F</kbd> ve *TV Modu* için <kbd>T</kbd>",
+            "both": "Her iki mod için tuşlar",
+            "tv": "Yalnızca TV Modu için tuş",
+            "def": "Yalnızca Varsayılan Mod için tuş"
+        },
         "lyricsHeader": "Şarkı sözleri ayarları",
         "lyrics": "Şarkı sözleri",
+        "lyricsDescription": [
+            "**Not:** Bu özelliği kullanmak için [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) özel uygulamasına ihtiyacınız var.",
+            "Özel uygulamayı yüklemek için bağlantıdaki talimatları izleyin."
+        ],
         "lyricsAlignment": {
             "setting": "Şarkı sözleri konumu",
             "left": "Sol",
             "center": "Orta",
             "right": "Sağ"
         },
+        "autoHideLyrics": "Şarkı sözlerini otomatik gizle (kullanılamadığında)",
         "lyricsAnimationTempo": "Şarkı sözleri animasyonu hızı",
-
         "generalHeader": "Genel ayarlar",
         "progressBar": "İlerleme çubuğu",
         "playerControls": "Oynatıcı kontrolleri",
         "trimTitle": "Başlığı kırp",
         "trimTitleUpNext": "Başlığı kırp (Sonraki şarkı gösterimi)",
+        "trimAlbum": "Albümü kırp",
         "showAlbum": {
             "setting": "Albüm'ü göster",
             "never": "Asla",
@@ -54,13 +87,24 @@
         "icons": "Simgeler",
         "songChangeAnimation": "Şarkı değiştirme animasyonu",
         "fullscreen": "Tam ekran",
-
         "extraHeader": "Ekstra özellikler",
         "backgroundChoice": {
             "setting": "Arka plan özellikleri",
-            "color": "Tek renk",
-            "artwork": "Albüm kapağı"
+            "description": [
+                "**Yeni:** **Animasyonlu albüm kapağı** seçeneğini deneyin!",
+                "**Uyarı:** Güzel görünüyor ancak kaynak yoğun olabilir ve deneyseldir."
+            ],
+            "dynamicColor": "Dinamik tek renk",
+            "staticColor": "Statik tek renk",
+            "artwork": "Albüm kapağı",
+            "animatedArt": "Animasyonlu Albüm Kapağı (Deneysel)",
+            "artist": "Sanatçı resmi"
         },
+        "sidebarQueue": "Kenar Çubuğunda Sırayı Etkinleştir (şarkı sözleri düğmesinin yerini alır)",
+        "sidebarQueueDescription": [
+            "Kenar çubuğundaki sırayı <kbd>Q</kbd> veya ekstra çubuktaki düğme ile değiştirin.",
+            "Deneysel özelliklerde ayarı etkinleştirdiğinizden emin olun."
+        ],
         "extraControls": "Ekstra Kontroller",
         "upnextDisplay": "Sonraki şarkıyı gösterme",
         "contextDisplay": {
@@ -71,12 +115,19 @@
         },
         "volumeDisplay": {
             "setting": "Ses çubuğunu gösterme",
+            "description": [
+                "`Akıllı` modda ses çubuğu şu durumlarda gösterilecektir:",
+                "  - farenizi ekranın sol tarafına hareket ettirdiğinizde.",
+                "  - ses seviyesi değiştirildiğinde."
+            ],
             "always": "Her zaman",
             "never": "Asla",
-            "mouse": "Yalnızca mause hareketinde",
-            "volume": "Yalnızca ses düzeyi değiştiği zaman"
+            "smart": "Akıllı"
         },
-
+        "overviewDisplay": {
+            "setting": "Genel Bakış Ekranı",
+            "description": "Zaman ve kontrol eylemleriyle kısa bir genel bakış kartı göster"
+        },
         "appearanceHeader": "Gelişmiş/Görünüm",
         "appearanceSubHeader": "Dikkat! Yalnızca ne yaptığını biliyorsan değiştir.",
         "backgroundColor": {
@@ -88,6 +139,7 @@
             "darkVibrant": "Karanlık parlak",
             "vibrantNonAlarming": "Göz almayan parlak"
         },
+        "staticColor": "Renk Seçimi (statik renkli arka plan için)",
         "themedButtons": "Albüm resminin renklerine göre tuşlar",
         "themedIcons": "Albüm resminin renklerine göre simgeler",
         "invertColors": {
@@ -96,7 +148,10 @@
             "always": "Her zaman",
             "auto": "Otomatik (Arka plana göre)"
         },
+        "verticalMonitorSupport": "Dikey Monitör Desteği",
+        "verticalMonitorSupportDescription": "Dikey bir monitör kurulumunuz varsa bunu etkinleştirin. Pencere yüksekliği genişlikten büyük olduğunda şarkı sözleri altta gösterilecektir.",
         "backAnimationTime": "Arkaplan animasyon stili",
+        "animationSpeed": "⭐ Animasyon Hızı (animasyonlu arka plan için)",
         "upnextScroll": {
             "setting": "Sonraki şarkı yazı animasyonu",
             "mq": "Marquee/Kayan",
@@ -105,7 +160,7 @@
         "upnextTime": "Sonraki şarkı kaçıncı saniyeden sonra gösterilsin? ",
         "backgroundBlur": "Arkaplan'ı bulanıklaştır",
         "backgroundBrightness": "Arka plan parlaklığı",
-
+        "aboutHeader": "Hakkında",
         "configReset": "Ayarları sıfırla",
         "reload": "İstemciyi (Spotify) yenile (F5)"
     },
