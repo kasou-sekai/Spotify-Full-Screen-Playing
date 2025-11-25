@@ -154,6 +154,9 @@ async function main() {
             }
         }
 
+        if (CFM.get("lyricsDisplay")) {
+            Lyrics.teardown();
+        }
         DOM.container.innerHTML = getHtmlContent(DOM.container.classList.contains("lyrics-hide-force"));
 
         DOM.back = DOM.container.querySelector("canvas")!;
@@ -164,6 +167,10 @@ async function main() {
         DOM.title = DOM.container.querySelector("#fsd-title span")!;
         DOM.artist = DOM.container.querySelector("#fsd-artist span")!;
         DOM.album = DOM.container.querySelector("#fsd-album span")!;
+        if (CFM.get("lyricsDisplay")) {
+            DOM.lyrics = DOM.container.querySelector("#fad-lyrics-plus-container")!;
+            Lyrics.attach(DOM.lyrics);
+        }
 
         if (CFM.get("contextDisplay") !== "never") {
             DOM.ctx_container = DOM.container.querySelector("#fsd-ctx-container")!;
@@ -263,6 +270,10 @@ async function main() {
     async function updateInfo() {
         const meta = Spicetify.Player.data.item?.metadata;
 
+        if (CFM.get("lyricsDisplay")) {
+            Lyrics.loadLyrics(Spicetify.Player.data.item?.uri ?? meta?.uri ?? meta?.track_uri);
+        }
+
         if (CFM.get("contextDisplay") !== "never")
             Context.updateContext().catch((err) => console.error("Error getting context: ", err));
 
@@ -327,14 +338,6 @@ async function main() {
                 DOM.album.innerText = albumText || "";
                 DOM.album.setAttribute("uri", meta?.album_uri || "");
                 updatedAlbum = true;
-            }
-            if (CFM.get("lyricsDisplay") && CFM.get("autoHideLyrics")) {
-                const lyricsContainer = DOM.container.querySelector<HTMLElement>(
-                    "#fad-lyrics-plus-container",
-                );
-                if (lyricsContainer) {
-                    Lyrics.autoHideLyrics();
-                }
             }
         };
 
@@ -516,6 +519,9 @@ async function main() {
         }
         if (CFM.get("playerControls") !== "never") {
             Spicetify.Player.removeEventListener("onplaypause", PlayerControls.updatePlayerControls.bind(PlayerControls));
+        }
+        if (CFM.get("lyricsDisplay")) {
+            Lyrics.teardown();
         }
         if (CFM.get("extraControls") !== "never") {
             heartObserver.disconnect();

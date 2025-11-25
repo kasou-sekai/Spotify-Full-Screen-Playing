@@ -61,8 +61,8 @@
         "lyricsHeader": "Lyrics Settings",
         "lyrics": "Lyrics",
         "lyricsDescription": [
-            "**Note:** You need the [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) custom app to use this feature.",
-            "Follow the instructions in the link to install the custom app."
+            "**Tip:** Uses Spotify's built-in lyrics first; install [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) for an extra source.",
+            "Follow the instructions in the link to install the custom app if you want that fallback."
         ],
         "lyricsAlignment": {
             "setting": "Lyrics Alignment",

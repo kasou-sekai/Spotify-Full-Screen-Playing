@@ -257,16 +257,35 @@
         right: var(--right-margin-lyrics);
         width: 50%;
         top: 7.5vh;
-        .lyrics-lyricsContainer-LyricsContainer {
-            --lyrics-color-active: var(--primary-color) !important;
-            --lyrics-color-inactive: var(--tertiary-color) !important;
-            --lyrics-highlight-background: rgba(var(--contrast-color), 0.7) !important;
-            --lyrics-align-text: var(--lyrics-alignment) !important;
-            --animation-tempo: 0.2s !important;
-            height: 85vh !important;
+        .lyrics-wrapper {
+            height: 85vh;
+            padding: 0 30px 0 10px;
+            color: var(--secondary-color);
+            text-align: var(--lyrics-alignment);
+            display: flex;
         }
-        .lyrics-config-button {
-            margin-right: 20px;
+        .lyrics-scroll {
+            width: 100%;
+            overflow-y: auto;
+            padding-right: 12px;
+        }
+        .lyrics-line {
+            margin: 10px 0;
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--tertiary-color);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .lyrics-line.active {
+            color: var(--primary-color);
+            font-weight: 700;
+            transform: scale(1.02);
+        }
+        .lyrics-status {
+            margin: auto;
+            width: 100%;
+            font-size: 18px;
+            color: var(--tertiary-color);
         }
     }
     &.lyrics-unavailable,
