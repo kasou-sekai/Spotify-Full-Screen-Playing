@@ -1,13 +1,6 @@
 # Spicetify Extensions
 
--   ## [Save Playlists](https://github.com/daksh2k/Spicetify-stuff/blob/master/Extensions/savePlaylists.js)
-
-    **Description:** Save any playlist by right clicking on a playlist > Save Playlist.\
-    A new playlist will be created with the same name + same image + last updated date of the parent playlist.
-
-    ![Save Playlist](https://i.imgur.com/2AEyRrs.png)
-
--   ## [Full Screen Mode](https://github.com/daksh2k/Spicetify-stuff/blob/master/Extensions/full-screen)
+-   ## [Full Screen Mode](Extensions/full-screen)
 
     **Description:** Modified from the [fullAppDisplay.js](https://github.com/spicetify/spicetify-cli/blob/master/Extensions/fullAppDisplay.js) with added features.\
     Fancy artwork and track status display.\
@@ -55,44 +48,3 @@
       <img align="center" src="https://i.imgur.com/isq69zU.png" alt="Default Mode" width="712" height="auto"/><hr>
       <img align="center" src="https://i.imgur.com/LtYLHiv.jpg" alt="TV Mode2" width="712" height="auto"/>
     </details>
-
--   ## [Auto Skip](https://github.com/daksh2k/Spicetify-stuff/blob/master/Extensions/auto-skip)
-
-    **Description:** Auto Skip Certain Songs such as remixes, acoustics etc.\
-    Toggle in Profile menu for each skipping option you want.
-
-    **New:** Will try to search and auto play original songs.
-
-    <img src="https://i.imgur.com/GxdGp9t.png" alt="Auto Skip" width="300" height="auto"/>
-
-    Current options:
-
-    -   Accoustic Songs
-    -   Instrumental Songs
-    -   Remix Songs
-    -   Live Songs
-    -   Radio/Censored Songs
-    -   Explicit Songs
-    -   Christmas Songs
-    -   Liked Songs
-
--   ## [Play Next](https://github.com/daksh2k/Spicetify-stuff/blob/master/Extensions/playNext.js)
-
-    **Description:** Add the option to context menu to add stuff(albums, tracks, playlists) to the top of the queue.\
-    Spotify `Add to Queue` works by adding tracks directly to the end of the queue.\
-    This option enables to directly add to top of the queue.
-
-    ![Play Next](https://i.imgur.com/osY8QmH.png)
-
--   ## [Volume Percentage](https://github.com/daksh2k/Spicetify-stuff/blob/master/Extensions/volumePercentage.js)
-
-    **Description:** Add the current Volume Percentage to the Volume Bar.
-
-    ![Volume Percentage](https://i.imgur.com/lQQXSIg.png)
-    <hr>
-
--   ## [Keyboard Shortcuts](https://github.com/daksh2k/Spicetify-stuff/blob/master/Extensions/keyboardShortcutMy.js)
-
-    **Description:** Modified from the [keyboardShortcut.js](https://github.com/khanhas/spicetify-cli/blob/master/Extensions/keyboardShortcut.js) with added shortcuts.
-
-    Look [here](https://github.com/daksh2k/Spicetify-stuff/blob/master/Extensions/keyboardShortcutMy.js#L56-L134) for the extra binds.

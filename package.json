@@ -1,7 +1,7 @@
 {
     "private": true,
     "workspaces": [
-        "./Extensions/*"
+        "./Extensions/full-screen"
     ],
     "scripts": {
         "update-types": "curl -s -o ./shared/types/spicetify.d.ts https://raw.githubusercontent.com/spicetify/spicetify-cli/master/globals.d.ts"
