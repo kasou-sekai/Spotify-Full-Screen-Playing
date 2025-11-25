@@ -71,6 +71,11 @@
             "center": "居中",
             "right": "靠右"
         },
+        "lyricsSize": {
+            "setting": "歌词大小",
+            "description": "点击加减按钮调整字号（12–99 像素）。",
+            "auto": "自动"
+        },
         "lyricsAnimationTempo": "歌词动画速度",
 
         "generalHeader": "通用设置",

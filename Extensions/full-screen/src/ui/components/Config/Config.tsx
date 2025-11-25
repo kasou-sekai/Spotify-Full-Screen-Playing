@@ -284,6 +284,17 @@ export class ConfigManager {
                 "lyricsAlignment",
                 (value: string) => this.saveOption("lyricsAlignment", value),
             ),
+            createAdjust(
+                translations[LOCALE].settings.lyricsSize.setting,
+                "lyricsSize",
+                "px",
+                Number(CFM.get("lyricsSize") || 30),
+                1,
+                12,
+                99,
+                (value: number) => this.saveOption("lyricsSize", value as unknown as Settings["lyricsSize"]),
+                translations[LOCALE].settings.lyricsSize.description,
+            ),
             headerText(translations[LOCALE].settings.generalHeader),
             this.createOptions(
                 translations[LOCALE].settings.progressBar,

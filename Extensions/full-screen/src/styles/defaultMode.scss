@@ -32,10 +32,10 @@
             right: 0;
             left: 0;
             width: 100%;
-            top: 50%;
-            height: 50%;
+            top: 15%;
+            height: auto;
             .lyrics-wrapper {
-                height: 95% !important;
+                max-height: 70vh !important;
             }
         }
         &.lyrics-unavailable,

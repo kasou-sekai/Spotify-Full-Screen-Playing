@@ -13,6 +13,7 @@ export type Config = {
 export type Settings = {
     lyricsDisplay: boolean;
     lyricsAlignment: "right" | "left" | "center";
+    lyricsSize: number;
     autoHideLyrics: boolean;
     animationTempo: number;
     progressBarDisplay: "never" | "mousemove" | "always";

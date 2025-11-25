@@ -85,6 +85,15 @@ async function main() {
     }
 
     let LOCALE: string = CFM.getGlobal("locale") as Config["locale"];
+    function applyLyricsScale() {
+        if (!CFM.get("lyricsDisplay")) return;
+        const size = Number(CFM.get("lyricsSize") || 30);
+        const basePx = 22;
+        const minScale = 0.7;
+        const maxScale = 4;
+        const scale = Math.min(maxScale, Math.max(minScale, size / basePx));
+        DOM.container?.style.setProperty("--lyrics-font-scale", `${scale}`);
+    }
 
     function render() {
         DOM.container.classList.toggle("lyrics-active", Boolean(CFM.get("lyricsDisplay")));
@@ -103,6 +112,8 @@ async function main() {
         DOM.container.setAttribute("mode", CFM.getMode());
         if (!CFM.get("lyricsDisplay") || CFM.get("extraControls") === "never")
             DOM.container.classList.remove("lyrics-hide-force");
+
+        applyLyricsScale();
 
         Spicetify.Player.removeEventListener("songchange", updateInfo);
         Spicetify.Player.removeEventListener("onplaypause", PlayerControls.updatePlayerControls.bind(PlayerControls));
@@ -578,6 +589,7 @@ async function main() {
             (CFM.get("verticalMonitorSupport") as Settings["verticalMonitorSupport"]) &&
             window.innerWidth < window.innerHeight,
         );
+        applyLyricsScale();
     }
 
     ConfigManager.init(

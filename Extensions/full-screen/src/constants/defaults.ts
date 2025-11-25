@@ -4,6 +4,7 @@ export const DEFAULTS: Config = {
     tv: {
         lyricsDisplay: true,
         lyricsAlignment: "right",
+        lyricsSize: 30,
         autoHideLyrics: true,
         animationTempo: 0.2,
         progressBarDisplay: "never",
@@ -42,6 +43,7 @@ export const DEFAULTS: Config = {
     def: {
         lyricsDisplay: true,
         lyricsAlignment: "right",
+        lyricsSize: 30,
         autoHideLyrics: true,
         animationTempo: 0.2,
         progressBarDisplay: "always",
