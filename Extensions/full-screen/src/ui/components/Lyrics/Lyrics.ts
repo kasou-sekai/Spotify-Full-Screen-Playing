@@ -104,7 +104,7 @@ export class Lyrics {
     private static applyLines(lines: LyricLine[], source: Exclude<LyricSource, null>) {
         this.source = source;
         this.lines = lines;
-        this.activeIndex = Math.min(lines.length - 1, 0);
+        this.activeIndex = -1;
         DOM.container.classList.remove("lyrics-unavailable");
         this.renderLines();
         this.startLoop();
@@ -163,7 +163,6 @@ export class Lyrics {
             else break;
         }
 
-        if (nextIndex < 0 && this.lines.length) nextIndex = 0;
         if (nextIndex === this.activeIndex) return;
 
         this.activeIndex = nextIndex;
@@ -175,16 +174,17 @@ export class Lyrics {
         if (!this.lineHeights.length || this.lineHeights.length !== this.lineNodes.length) {
             this.measureHeights();
         }
-        const current = Math.max(0, Math.min(this.activeIndex, this.lineNodes.length - 1));
-        this.lineNodes.forEach((node, idx) => node.classList.toggle("active", idx === current));
+        const hasActive = this.activeIndex >= 0;
+        const current = Math.max(0, Math.min(hasActive ? this.activeIndex : 0, this.lineNodes.length - 1));
+        this.lineNodes.forEach((node, idx) => node.classList.toggle("active", hasActive && idx === current));
 
         const fontSize = this.getFontSize();
         if (Math.abs(fontSize - this.lastMeasuredFontSize) > 0.5) {
             this.measureHeights();
         }
-        const baseGap = Math.max(24, Math.min(60, fontSize * 1.15));
+        const baseGap = Math.max(28, Math.min(72, fontSize * 1.35));
         const containerHeight = this.containerHeight || this.lyricsRoot.clientHeight || 1;
-        const centerY = containerHeight * 0.35;
+        const centerY = containerHeight * 0.38;
         const baseIndent = Math.max(12, Math.min(36, fontSize * 0.8));
 
         const transforms: {
@@ -202,43 +202,65 @@ export class Lyrics {
         const translateByOffset = (offset: number) => Math.max(0, baseIndent - offset * 6);
         const delayByOffset = (offset: number) => Math.min(6, offset) * 45;
 
-        transforms[current] = {
-            top: centerY - this.lineHeights[current] / 2,
-            scale: 1,
-            blur: 0,
-            opacity: 1,
-            delay: 0,
-            translate: 0,
-        };
-
-        for (let i = current - 1; i >= 0; i--) {
-            const offset = current - i;
-            const scale = scaleByOffset(offset);
-            const height = this.lineHeights[i] * scale;
-            const top = transforms[i + 1].top - height - baseGap;
-            transforms[i] = {
-                top,
-                scale,
-                blur: blurByOffset(offset),
-                opacity: opacityByOffset(offset),
-                delay: delayByOffset(offset),
-                translate: translateByOffset(offset, -1),
+        if (!hasActive) {
+            const firstHeight = this.lineHeights[0] || fontSize * 1.1;
+            const firstScale = scaleByOffset(1);
+            let runningTop = centerY + (firstHeight * firstScale) / 2 + baseGap;
+            for (let i = 0; i < this.lineNodes.length; i++) {
+                const offset = i + 1;
+                const scale = scaleByOffset(offset);
+                const blur = blurByOffset(offset);
+                const opacity = opacityByOffset(offset);
+                transforms[i] = {
+                    top: runningTop,
+                    scale,
+                    blur,
+                    opacity,
+                    delay: 0,
+                    translate: translateByOffset(offset),
+                };
+                const h = (this.lineHeights[i] || fontSize) * scale;
+                runningTop += h + baseGap;
+            }
+        } else {
+            transforms[current] = {
+                top: centerY - this.lineHeights[current] / 2,
+                scale: 1,
+                blur: 0,
+                opacity: 1,
+                delay: 0,
+                translate: translateByOffset(0),
             };
-        }
 
-        for (let i = current + 1; i < this.lineNodes.length; i++) {
-            const offset = i - current;
-            const scale = scaleByOffset(offset);
-            const height = this.lineHeights[i - 1] * transforms[i - 1].scale;
-            const top = transforms[i - 1].top + height + baseGap;
-            transforms[i] = {
-                top,
-                scale,
-                blur: blurByOffset(offset),
-                opacity: opacityByOffset(offset),
-                delay: delayByOffset(offset),
-                translate: translateByOffset(offset, 1),
-            };
+            for (let i = current - 1; i >= 0; i--) {
+                const offset = current - i;
+                const scale = scaleByOffset(offset);
+                const height = this.lineHeights[i] * scale;
+                const top = transforms[i + 1].top - height - baseGap;
+                transforms[i] = {
+                    top,
+                    scale,
+                    blur: blurByOffset(offset),
+                    opacity: opacityByOffset(offset),
+                    delay: delayByOffset(offset),
+                    translate: translateByOffset(offset),
+                };
+            }
+
+            for (let i = current + 1; i < this.lineNodes.length; i++) {
+                const offset = i - current;
+                const scale = scaleByOffset(offset);
+                const height = this.lineHeights[i - 1] * transforms[i - 1].scale;
+                const top = transforms[i - 1].top + height + baseGap;
+                transforms[i] = {
+                    top,
+                    scale,
+                    blur: blurByOffset(offset),
+                    opacity: opacityByOffset(offset),
+                    delay: delayByOffset(offset),
+                    translate: translateByOffset(offset),
+                };
+            }
         }
 
         this.lineNodes.forEach((node, idx) => {
@@ -253,7 +275,7 @@ export class Lyrics {
             node.style.filter = t.blur ? `blur(${t.blur}px)` : "none";
         });
 
-        this.updateScrollbar(current, containerHeight);
+        this.updateScrollbar(hasActive ? current : 0, containerHeight);
     }
 
     private static updateScrollbar(current: number, containerHeight: number) {

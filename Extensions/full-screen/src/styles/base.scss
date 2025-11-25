@@ -297,7 +297,7 @@
             position: absolute;
             left: 0;
             transform-origin: left center;
-            line-height: 1.45;
+            line-height: 1.55;
             max-width: calc(100% - 60px);
             will-change: transform, filter, opacity;
             transition:
@@ -318,7 +318,10 @@
         .rnp-lyrics-line.active > div {
             color: var(--primary-color);
             font-weight: 700;
-            text-shadow: 0 6px 22px rgba(var(--main-color), 0.08);
+            text-shadow:
+                0 0 12px rgba(var(--main-color), 0.16),
+                0 0 20px rgba(var(--main-color), 0.12),
+                0 4px 16px rgba(var(--main-color), 0.1);
         }
         .rnp-lyrics-scrollbar {
             position: absolute;
