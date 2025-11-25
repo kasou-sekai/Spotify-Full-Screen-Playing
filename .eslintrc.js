@@ -9,7 +9,7 @@ module.exports = {
         project: ["tsconfig.json"],
         sourceType: "module",
     },
-    files: ["./Extensions/full-screen/**/*"],
+    files: ["./src/**/*"],
     plugins: ["react", "@typescript-eslint"],
     settings: {
         react: {

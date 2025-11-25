@@ -106,7 +106,7 @@ export function getAboutSection() {
         <div class="setting-container about-section">
             <div class="setting-about">Version: ${"  " + version}</div>
             <div class="setting-about">Made with 💖 by <a class="about" href="https://github.com/daksh2k">@daksh2k</a></div>
-            <div class="setting-about">Source code: <a class="about" href="https://github.com/daksh2k/Spicetify-stuff/tree/master/Extensions/full-screen">GitHub</a></div>
+            <div class="setting-about">Source code: <a class="about" href="https://github.com/daksh2k/Spicetify-stuff">GitHub</a></div>
             <div class="setting-about">Report issues: <a class="about" href="https://github.com/daksh2k/Spicetify-stuff/issues/new/choose">GitHub</a></div>
             <div class="setting-about"><button class="main-buttons-button main-button-primary" id="changelog">Show Changelog</button></div>
         </div>

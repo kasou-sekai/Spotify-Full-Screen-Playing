@@ -1,14 +1,36 @@
 {
+    "name": "full-screen",
+    "version": "2.8.0",
     "private": true,
-    "workspaces": [
-        "./Extensions/full-screen"
-    ],
+    "license": "MIT",
     "scripts": {
-        "update-types": "curl -s -o ./shared/types/spicetify.d.ts https://raw.githubusercontent.com/spicetify/spicetify-cli/master/globals.d.ts"
+        "build": "spicetify-creator",
+        "build-local": "spicetify-creator --out=dist --minify",
+        "watch": "spicetify-creator --watch",
+        "update-types": "curl -s -o ./shared/types/spicetify.d.ts https://raw.githubusercontent.com/spicetify/spicetify-cli/master/globals.d.ts",
+        "format": "prettier --write ."
+    },
+    "dependencies": {
+        "react-icons": "^5.5.0"
     },
     "devDependencies": {
+        "@types/lodash.debounce": "^4.0.9",
+        "@types/lodash.defaultsdeep": "^4.6.9",
         "@types/node": "^22.9.3",
-        "prettier": "^3.3.3"
-    },
-    "license": "MIT"
+        "@types/react": "18.3.11",
+        "@types/react-dom": "18.3.1",
+        "@typescript-eslint/eslint-plugin": "^8.47.0",
+        "@typescript-eslint/parser": "^8.47.0",
+        "classnames": "^2.5.1",
+        "eslint": "^9.39.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-react": "^7.37.5",
+        "lodash.debounce": "^4.0.8",
+        "lodash.defaultsdeep": "^4.6.1",
+        "marked": "^17.0.1",
+        "prettier": "^3.3.3",
+        "semver": "^7.7.3",
+        "spicetify-creator": "^1.0.17",
+        "typescript": "^5.9.3"
+    }
 }

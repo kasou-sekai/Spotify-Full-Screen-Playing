@@ -322,6 +322,22 @@
                 0 0 12px rgba(var(--main-color), 0.16),
                 0 0 20px rgba(var(--main-color), 0.12),
                 0 4px 16px rgba(var(--main-color), 0.1);
+            animation: rnp-lyric-glow 3s ease-in-out infinite;
+        }
+        @keyframes rnp-lyric-glow {
+            0%,
+            100% {
+                text-shadow:
+                    0 0 10px rgba(var(--main-color), 0.12),
+                    0 0 16px rgba(var(--main-color), 0.1),
+                    0 3px 12px rgba(var(--main-color), 0.08);
+            }
+            50% {
+                text-shadow:
+                    0 0 16px rgba(var(--main-color), 0.22),
+                    0 0 26px rgba(var(--main-color), 0.16),
+                    0 5px 18px rgba(var(--main-color), 0.12);
+            }
         }
         .rnp-lyrics-scrollbar {
             position: absolute;
