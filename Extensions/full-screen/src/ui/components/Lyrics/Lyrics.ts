@@ -184,7 +184,8 @@ export class Lyrics {
         }
         const baseGap = Math.max(24, Math.min(60, fontSize * 1.15));
         const containerHeight = this.containerHeight || this.lyricsRoot.clientHeight || 1;
-        const centerY = containerHeight * 0.5;
+        const centerY = containerHeight * 0.35;
+        const baseIndent = Math.max(12, Math.min(36, fontSize * 0.8));
 
         const transforms: {
             top: number;
@@ -198,7 +199,7 @@ export class Lyrics {
         const scaleByOffset = (offset: number) => Math.max(0.72, 1 - 0.12 * offset);
         const blurByOffset = (offset: number) => Math.min(4.5, offset * 0.9);
         const opacityByOffset = (offset: number) => Math.max(0.32, 1 - Math.max(0, offset - 1) * 0.22);
-        const translateByOffset = () => 0;
+        const translateByOffset = (offset: number) => Math.max(0, baseIndent - offset * 6);
         const delayByOffset = (offset: number) => Math.min(6, offset) * 45;
 
         transforms[current] = {
