@@ -137,9 +137,6 @@ async function main() {
 
         modifyIsAnimationRunning(false);
 
-        if (origLoc !== "/lyrics-plus" && Utils.isModeActivated()) {
-            Utils.revertPathHistory(origLoc);
-        }
         window.dispatchEvent(new Event("fad-request"));
         window.removeEventListener("lyrics-plus-update", Lyrics.handleLyricsUpdate);
 
@@ -271,7 +268,7 @@ async function main() {
         const meta = Spicetify.Player.data.item?.metadata;
 
         if (CFM.get("lyricsDisplay")) {
-            Lyrics.loadLyrics(Spicetify.Player.data.item?.uri ?? meta?.uri ?? meta?.track_uri);
+            loadCurrentLyrics();
         }
 
         if (CFM.get("contextDisplay") !== "never")
@@ -407,7 +404,13 @@ async function main() {
         }
     }
 
-    let origLoc: string;
+    const loadCurrentLyrics = () => {
+        if (!CFM.get("lyricsDisplay")) return;
+        const meta = Spicetify.Player.data.item?.metadata;
+        const uri = Spicetify.Player.data.item?.uri ?? meta?.uri ?? meta?.track_uri;
+        if (uri) Lyrics.loadLyrics(uri);
+    };
+
     const heartObserver = new MutationObserver(ExtraControls.updateHeart.bind(ExtraControls));
 
     async function activate() {
@@ -480,11 +483,12 @@ async function main() {
         document.querySelector(".Root__top-container")?.append(DOM.style, DOM.container);
         if (CFM.get("lyricsDisplay")) {
             window.addEventListener("lyrics-plus-update", Lyrics.handleLyricsUpdate);
-            origLoc = Spicetify.Platform.History.location.pathname;
-            if (origLoc !== "/lyrics-plus") {
-                Spicetify.Platform.History.push("/lyrics-plus");
-            }
             window.dispatchEvent(new Event("fad-request"));
+            // hard reset lyric renderer to avoid stale raf state after re-entry
+            Lyrics.teardown();
+            Lyrics.attach(DOM.lyrics);
+            loadCurrentLyrics();
+            setTimeout(loadCurrentLyrics, 400);
         }
         Spicetify.Mousetrap.bind("f11", fsToggle);
         document.addEventListener("fullscreenchange", fullScreenListener);
@@ -538,9 +542,6 @@ async function main() {
         DOM.container.remove();
         if (CFM.get("lyricsDisplay")) {
             window.removeEventListener("lyrics-plus-update", Lyrics.handleLyricsUpdate);
-            if (origLoc !== "/lyrics-plus") {
-                Utils.revertPathHistory(origLoc);
-            }
             window.dispatchEvent(new Event("fad-request"));
         }
         document.removeEventListener("fullscreenchange", fullScreenListener);
