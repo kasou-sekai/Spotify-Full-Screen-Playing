@@ -147,23 +147,12 @@ async function main() {
 
         DOM.style.innerHTML = `
         #full-screen-display {
-            --lyrics-alignment: ${CFM.get("lyricsAlignment")};
-            --right-margin-lyrics: ${getRightMarginLyrics()};
+            --lyrics-alignment: left;
+            --right-margin-lyrics: 0px;
             --icons-display: ${CFM.get("icons") ? "inline-block" : "none"};
             --fs-transition: ${CFM.get("backAnimationTime")}s;
        }
        `;
-
-        function getRightMarginLyrics() {
-            switch (CFM.get("lyricsAlignment")) {
-                case "left":
-                    return "50px";
-                case "center":
-                    return "0px";
-                case "right":
-                    return "-50px";
-            }
-        }
 
         if (CFM.get("lyricsDisplay")) {
             Lyrics.teardown();

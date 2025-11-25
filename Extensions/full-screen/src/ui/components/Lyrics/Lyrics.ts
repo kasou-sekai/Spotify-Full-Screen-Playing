@@ -6,12 +6,17 @@ type LyricSource = "spotify" | "lyrics-plus" | null;
 
 export class Lyrics {
     private static container: HTMLElement | null = null;
-    private static scrollArea: HTMLElement | null = null;
+    private static lyricsRoot: HTMLElement | null = null;
+    private static scrollbarThumb: HTMLElement | null = null;
+    private static lineNodes: HTMLElement[] = [];
+    private static lineHeights: number[] = [];
+    private static containerHeight = 0;
     private static lines: LyricLine[] = [];
     private static activeIndex = -1;
     private static rafId: number | null = null;
     private static source: LyricSource = null;
-    private static isAutoScrolling = false;
+    private static resizeObserver: ResizeObserver | null = null;
+    private static lastMeasuredFontSize = 0;
 
     static attach(container: HTMLElement) {
         this.container = container;
@@ -21,11 +26,15 @@ export class Lyrics {
         if (this.rafId) cancelAnimationFrame(this.rafId);
         this.rafId = null;
         this.lines = [];
+        this.lineNodes = [];
+        this.lineHeights = [];
+        this.containerHeight = 0;
         this.activeIndex = -1;
         this.source = null;
-        this.isAutoScrolling = false;
-        this.scrollArea?.removeEventListener("scroll", this.handleScroll);
-        this.scrollArea = null;
+        this.stopResizeObserver();
+        this.lastMeasuredFontSize = 0;
+        this.scrollbarThumb = null;
+        this.lyricsRoot = null;
         this.container = null;
     }
 
@@ -77,6 +86,15 @@ export class Lyrics {
 
     private static renderStatus(text: string, unavailable: boolean) {
         if (!this.container) return;
+        this.stopResizeObserver();
+        this.lines = [];
+        this.lineNodes = [];
+        this.lineHeights = [];
+        this.containerHeight = 0;
+        this.activeIndex = -1;
+        this.lastMeasuredFontSize = 0;
+        this.lyricsRoot = null;
+        this.scrollbarThumb = null;
         if (unavailable) DOM.container.classList.add("lyrics-unavailable");
         else DOM.container.classList.remove("lyrics-unavailable");
         this.stopLoop();
@@ -86,7 +104,7 @@ export class Lyrics {
     private static applyLines(lines: LyricLine[], source: Exclude<LyricSource, null>) {
         this.source = source;
         this.lines = lines;
-        this.activeIndex = -1;
+        this.activeIndex = Math.min(lines.length - 1, 0);
         DOM.container.classList.remove("lyrics-unavailable");
         this.renderLines();
         this.startLoop();
@@ -97,12 +115,26 @@ export class Lyrics {
         const body = this.lines
             .map(
                 (line, idx) =>
-                    `<div class="lyrics-line" data-index="${idx}" data-time="${line.time ?? ""}">${line.text}</div>`,
+                    `<div class="rnp-lyrics-line" data-index="${idx}" data-time="${line.time ?? ""}">
+                        <div class="rnp-lyrics-line-original">${line.text}</div>
+                    </div>`,
             )
             .join("");
-        this.container.innerHTML = `<div class="lyrics-wrapper"><div class="lyrics-scroll">${body}</div></div>`;
-        this.scrollArea = this.container.querySelector(".lyrics-scroll") as HTMLElement;
-        this.scrollArea?.addEventListener("scroll", this.handleScroll);
+        this.container.innerHTML = `
+            <div class="lyrics-wrapper">
+                <div class="rnp-lyrics">
+                    ${body}
+                </div>
+                <div class="rnp-lyrics-scrollbar">
+                    <div class="rnp-lyrics-scrollbar-thumb"></div>
+                </div>
+            </div>`;
+        this.lyricsRoot = this.container.querySelector(".rnp-lyrics") as HTMLElement;
+        this.scrollbarThumb = this.container.querySelector(".rnp-lyrics-scrollbar-thumb") as HTMLElement;
+        this.lineNodes = Array.from(this.container.querySelectorAll<HTMLElement>(".rnp-lyrics-line"));
+        this.measureHeights();
+        this.applyTransforms(true);
+        this.setupResizeObserver();
     }
 
     private static startLoop() {
@@ -131,59 +163,138 @@ export class Lyrics {
             else break;
         }
 
+        if (nextIndex < 0 && this.lines.length) nextIndex = 0;
         if (nextIndex === this.activeIndex) return;
 
-        const nodes = Array.from(this.container.querySelectorAll<HTMLElement>(".lyrics-line"));
-        const activeNode = nextIndex >= 0 ? nodes[nextIndex] : null;
-        const lineHeight = activeNode?.getBoundingClientRect().height || 32;
-        const centerOffset =
-            this.scrollArea && activeNode
-                ? this.scrollArea.clientHeight / 2 - lineHeight / 2
-                : 0;
-        const desiredOffset = activeNode
-            ? Math.max(0, activeNode.offsetTop - centerOffset)
-            : this.scrollArea?.scrollTop || 0;
+        this.activeIndex = nextIndex;
+        this.applyTransforms();
+    }
 
-        nodes.forEach((node, idx) => {
-            const distance = Math.abs(idx - nextIndex);
-            const isActive = idx === nextIndex && nextIndex >= 0;
-            node.classList.toggle("active", isActive);
+    private static applyTransforms(skipAnimation = false) {
+        if (!this.lyricsRoot || !this.lineNodes.length) return;
+        if (!this.lineHeights.length || this.lineHeights.length !== this.lineNodes.length) {
+            this.measureHeights();
+        }
+        const current = Math.max(0, Math.min(this.activeIndex, this.lineNodes.length - 1));
+        this.lineNodes.forEach((node, idx) => node.classList.toggle("active", idx === current));
 
-            const blur = isActive ? 0 : Math.min(3.5, distance * 0.6);
-            const opacity = isActive ? 1 : Math.max(0.35, 1 - distance * 0.14);
-            const scale = isActive ? 1.12 : Math.max(0.94, 1 - distance * 0.025);
-            const translate =
-                nextIndex < 0
-                    ? 0
-                    : Math.min(distance * 4, 14) * (idx < nextIndex ? -1 : 1);
+        const fontSize = this.getFontSize();
+        if (Math.abs(fontSize - this.lastMeasuredFontSize) > 0.5) {
+            this.measureHeights();
+        }
+        const baseGap = Math.max(24, Math.min(60, fontSize * 1.15));
+        const containerHeight = this.containerHeight || this.lyricsRoot.clientHeight || 1;
+        const centerY = containerHeight * 0.5;
 
-            // Rubber-band: lines below lag slightly longer than above.
-            const duration = isActive ? 0.25 : idx > nextIndex ? 0.5 : 0.32;
-            const easing = idx > nextIndex
-                ? "cubic-bezier(0.16, 0.8, 0.2, 1.1)"
-                : "cubic-bezier(0.2, 0.6, 0.35, 1)";
-            node.style.transitionDuration = `${duration}s`;
-            node.style.transitionTimingFunction = easing;
+        const transforms: {
+            top: number;
+            scale: number;
+            blur: number;
+            opacity: number;
+            delay: number;
+            translate: number;
+        }[] = new Array(this.lineNodes.length).fill(null as never);
 
-            node.style.setProperty("--lyr-blur", `${blur}px`);
-            node.style.setProperty("--lyr-opacity", `${opacity}`);
-            node.style.setProperty("--lyr-scale", `${scale}`);
-            node.style.setProperty("--lyr-translate", `${translate}px`);
-        });
+        const scaleByOffset = (offset: number) => Math.max(0.72, 1 - 0.12 * offset);
+        const blurByOffset = (offset: number) => Math.min(4.5, offset * 0.9);
+        const opacityByOffset = (offset: number) => Math.max(0.32, 1 - Math.max(0, offset - 1) * 0.22);
+        const translateByOffset = () => 0;
+        const delayByOffset = (offset: number) => Math.min(6, offset) * 45;
 
-        if (activeNode && this.scrollArea) {
-            this.isAutoScrolling = true;
-            this.scrollArea.dataset.autoScroll = "true";
-            this.scrollArea.scrollTo({ top: desiredOffset, behavior: "smooth" });
-            window.setTimeout(() => {
-                this.isAutoScrolling = false;
-                this.scrollArea?.removeAttribute("data-auto-scroll");
-            }, 480);
-        } else if (this.scrollArea) {
-            this.scrollArea.removeAttribute("data-auto-scroll");
+        transforms[current] = {
+            top: centerY - this.lineHeights[current] / 2,
+            scale: 1,
+            blur: 0,
+            opacity: 1,
+            delay: 0,
+            translate: 0,
+        };
+
+        for (let i = current - 1; i >= 0; i--) {
+            const offset = current - i;
+            const scale = scaleByOffset(offset);
+            const height = this.lineHeights[i] * scale;
+            const top = transforms[i + 1].top - height - baseGap;
+            transforms[i] = {
+                top,
+                scale,
+                blur: blurByOffset(offset),
+                opacity: opacityByOffset(offset),
+                delay: delayByOffset(offset),
+                translate: translateByOffset(offset, -1),
+            };
         }
 
-        this.activeIndex = nextIndex;
+        for (let i = current + 1; i < this.lineNodes.length; i++) {
+            const offset = i - current;
+            const scale = scaleByOffset(offset);
+            const height = this.lineHeights[i - 1] * transforms[i - 1].scale;
+            const top = transforms[i - 1].top + height + baseGap;
+            transforms[i] = {
+                top,
+                scale,
+                blur: blurByOffset(offset),
+                opacity: opacityByOffset(offset),
+                delay: delayByOffset(offset),
+                translate: translateByOffset(offset, 1),
+            };
+        }
+
+        this.lineNodes.forEach((node, idx) => {
+            const t = transforms[idx];
+            if (!t) return;
+            const duration = skipAnimation ? 0 : 520;
+            node.style.transitionDuration = `${duration}ms`;
+            node.style.transitionDelay = `${skipAnimation ? 0 : t.delay}ms`;
+            node.style.transitionTimingFunction = "var(--lyric-timing-function, ease)";
+            node.style.transform = `translate3d(${t.translate}px, ${t.top}px, 0) scale(${t.scale})`;
+            node.style.opacity = `${t.opacity}`;
+            node.style.filter = t.blur ? `blur(${t.blur}px)` : "none";
+        });
+
+        this.updateScrollbar(current, containerHeight);
+    }
+
+    private static updateScrollbar(current: number, containerHeight: number) {
+        if (!this.scrollbarThumb) return;
+        const total = Math.max(1, this.lines.length);
+        const thumbHeight = Math.max(containerHeight / total, 28);
+        const track = containerHeight - thumbHeight;
+        const perStep = total > 1 ? track / (total - 1) : 0;
+        this.scrollbarThumb.style.height = `${thumbHeight}px`;
+        this.scrollbarThumb.style.top = `${Math.max(0, Math.min(track, perStep * current))}px`;
+        this.scrollbarThumb.classList.toggle("no-scroll", total <= 1);
+    }
+
+    private static measureHeights() {
+        if (!this.lyricsRoot) return;
+        this.lineHeights = this.lineNodes.map((node) => node.getBoundingClientRect().height || 0);
+        this.containerHeight = this.lyricsRoot.clientHeight;
+        this.lastMeasuredFontSize = this.getFontSize();
+    }
+
+    private static setupResizeObserver() {
+        if (!this.lyricsRoot || typeof ResizeObserver === "undefined") return;
+        this.stopResizeObserver();
+        this.resizeObserver = new ResizeObserver(() => {
+            this.measureHeights();
+            this.applyTransforms(true);
+        });
+        this.resizeObserver.observe(this.lyricsRoot);
+    }
+
+    private static stopResizeObserver() {
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+            this.resizeObserver = null;
+        }
+    }
+
+    private static getFontSize() {
+        if (!this.container) return 24;
+        const val = window.getComputedStyle(this.container).getPropertyValue("font-size");
+        const parsed = Number.parseFloat(val);
+        return Number.isFinite(parsed) ? parsed : 24;
     }
 
     private static normalizeLines(raw: any): LyricLine[] {
@@ -204,9 +315,4 @@ export class Lyrics {
             })
             .filter(Boolean) as LyricLine[];
     }
-
-    private static handleScroll = () => {
-        if (this.isAutoScrolling) return;
-        this.scrollArea?.removeAttribute("data-auto-scroll");
-    };
 }

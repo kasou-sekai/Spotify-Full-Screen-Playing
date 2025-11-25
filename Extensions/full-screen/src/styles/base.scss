@@ -259,79 +259,96 @@
         right: var(--right-margin-lyrics);
         width: 50%;
         top: 15vh;
+        --lyric-timing-function: cubic-bezier(0.3, 0.15, 0.2, 1);
         .lyrics-wrapper {
-            height: auto;
-            max-height: 70vh;
+            position: relative;
+            height: clamp(320px, 70vh, 720px);
             min-height: calc(2em * 5);
-            padding: 0 30px 0 10px;
+            padding: 0 20px 0 6px;
             color: var(--secondary-color);
-            text-align: var(--lyrics-alignment);
-            display: flex;
             font-size: calc(var(--lyrics-base-font-size) * var(--lyrics-font-scale, 1));
+            box-sizing: border-box;
         }
-        .lyrics-scroll {
-            width: 100%;
-            overflow-y: auto;
-            max-height: 100%;
-            padding-right: 12px;
-            padding-top: 1.2em;
-            padding-bottom: 1.2em;
-            scrollbar-width: thin;
-            transition: opacity 0.2s ease;
+        .rnp-lyrics {
+            width: calc(100% - 6px);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            color: var(--secondary-color);
+            text-align: left;
+            box-sizing: border-box;
+            padding: 0 20px;
             -webkit-mask-image: linear-gradient(
-                180deg,
-                transparent 0%,
-                rgba(0, 0, 0, 0.6) 12%,
-                rgba(0, 0, 0, 1) 25%,
-                rgba(0, 0, 0, 1) 75%,
-                rgba(0, 0, 0, 0.6) 88%,
-                transparent 100%
+                0deg,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 1) 6%,
+                rgba(0, 0, 0, 1) 94%,
+                rgba(0, 0, 0, 0) 100%
             );
             mask-image: linear-gradient(
-                180deg,
-                transparent 0%,
-                rgba(0, 0, 0, 0.6) 12%,
-                rgba(0, 0, 0, 1) 25%,
-                rgba(0, 0, 0, 1) 75%,
-                rgba(0, 0, 0, 0.6) 88%,
-                transparent 100%
+                0deg,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 1) 6%,
+                rgba(0, 0, 0, 1) 94%,
+                rgba(0, 0, 0, 0) 100%
             );
-            &[data-auto-scroll="true"] {
-                scrollbar-width: none;
-            }
-            &[data-auto-scroll="true"]::-webkit-scrollbar {
-                width: 0;
-                height: 0;
-            }
         }
-        .lyrics-line {
-            margin: 10px 0;
-            font-size: 1.05em;
-            line-height: 2;
-            color: var(--tertiary-color);
+        .rnp-lyrics-line {
+            position: absolute;
+            left: 0;
+            transform-origin: left center;
+            line-height: 1.45;
+            max-width: calc(100% - 40px);
+            will-change: transform, filter, opacity;
             transition:
-                color 0.25s ease,
-                transform 0.35s ease,
-                filter 0.35s ease,
-                letter-spacing 0.35s ease,
-                opacity 0.35s ease;
-            letter-spacing: 0.1px;
-            white-space: pre-wrap;
-            transform-origin: center;
-            opacity: var(--lyr-opacity, 0.6);
-            filter: blur(var(--lyr-blur, 0px));
-            transform: translateY(var(--lyr-translate, 0px)) scale(var(--lyr-scale, 1));
+                transform 0.5s var(--lyric-timing-function),
+                filter 0.5s ease,
+                opacity 0.5s ease;
+            opacity: 0.55;
         }
-        .lyrics-line.active {
+        .rnp-lyrics-line > div {
+            transition: opacity 0.4s ease;
+            color: var(--tertiary-color);
+            white-space: pre-wrap;
+        }
+        .rnp-lyrics-line.active {
+            z-index: 2;
+            opacity: 1;
+        }
+        .rnp-lyrics-line.active > div {
             color: var(--primary-color);
-            font-weight: 800;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            text-shadow: 0 6px 22px rgba(var(--main-color), 0.08);
+        }
+        .rnp-lyrics-scrollbar {
+            position: absolute;
+            right: 4px;
+            top: 0;
+            height: 100%;
+            width: 6px;
+        }
+        .rnp-lyrics-scrollbar-thumb {
+            position: absolute;
+            right: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            opacity: 0.22;
+            border-radius: 999px;
+            transition: top 0.4s ease, opacity 0.25s ease;
+        }
+        .rnp-lyrics-scrollbar-thumb.no-scroll {
+            opacity: 0;
+            pointer-events: none;
+        }
+        &:not(:hover) .rnp-lyrics-scrollbar-thumb {
+            opacity: 0;
         }
         .lyrics-status {
             margin: auto;
             width: 100%;
             font-size: 18px;
             color: var(--tertiary-color);
+            text-align: center;
         }
     }
     &.lyrics-unavailable,
