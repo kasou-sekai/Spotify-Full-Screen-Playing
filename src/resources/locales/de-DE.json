@@ -60,8 +60,7 @@
         "lyricsHeader": "Ausrichtung des Liedtextes",
         "lyrics": "Liedtext",
         "lyricsDescription": [
-            "**Hinweis:** Sie benötigen die benutzerdefinierte App [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus), um diese Funktion zu nutzen.",
-            "Folgen Sie den Anweisungen im Link, um die benutzerdefinierte App zu installieren."
+            "**Hinweis:** Verwendet die integrierten Spotify-Songtexte, falls verfügbar."
         ],
         "lyricsAlignment": {
             "setting": "Liedtext Ausrichtung",

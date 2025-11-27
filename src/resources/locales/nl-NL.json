@@ -60,8 +60,7 @@
         "lyricsHeader": "Tekstinstellingen",
         "lyrics": "Tekst",
         "lyricsDescription": [
-            "**Opmerking:** Je hebt de [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) custom app nodig voor deze functie.",
-            "Volg de instructies in de link om te installeren."
+            "**Opmerking:** Gebruikt de ingebouwde Spotify-songteksten wanneer beschikbaar."
         ],
         "lyricsAlignment": {
             "setting": "Tekstuitlijning",

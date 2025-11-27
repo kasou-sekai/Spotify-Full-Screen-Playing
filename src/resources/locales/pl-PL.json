@@ -60,8 +60,7 @@
         "lyricsHeader": "Ustawienia tekstu",
         "lyrics": "Tekst",
         "lyricsDescription": [
-            "**Uwaga:** Potrzebujesz niestandardowej aplikacji [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus), aby korzystać z tej funkcji.",
-            "Postępuj zgodnie z instrukcjami w linku, aby zainstalować."
+            "**Uwaga:** Korzysta z wbudowanych tekstów Spotify, jeśli są dostępne."
         ],
         "lyricsAlignment": {
             "setting": "Wyrównanie tekstu",

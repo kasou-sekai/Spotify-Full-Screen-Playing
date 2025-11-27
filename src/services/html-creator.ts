@@ -38,7 +38,7 @@ export const getHtmlContent = (areLyricsForceHidden: boolean) => {
 <div id="fsd-volume-parent"></div>
 <div id="fsd-overview-card-parent"></div>
 
-${CFM.get("lyricsDisplay") ? `<div id="fad-lyrics-plus-container"></div>` : ""}
+${CFM.get("lyricsDisplay") ? `<div id="fad-lyrics-container"></div>` : ""}
 <div id="fsd-foreground">
     <div id="fsd-art">
         <div id="fsd-art-image" class="fsd-background-fade">

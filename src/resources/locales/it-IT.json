@@ -60,8 +60,7 @@
         "lyricsHeader": "Impostazioni testo",
         "lyrics": "Mostra testo",
         "lyricsDescription": [
-            "**Nota:** Serve [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) per usare questa funzione.",
-            "Segui le instruzioni nel link per installare l'app."
+            "**Nota:** Usa i testi integrati di Spotify quando disponibili."
         ],
         "lyricsAlignment": {
             "setting": "Allineamento testo",

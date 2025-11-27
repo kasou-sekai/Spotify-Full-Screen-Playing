@@ -60,8 +60,7 @@
         "lyricsHeader": "गीत सेटिंग्स",
         "lyrics": "गीत",
         "lyricsDescription": [
-            "**नोट:** इस सुविधा का उपयोग करने के लिए आपको [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) कस्टम ऐप की आवश्यकता है।",
-            "कस्टम ऐप इंस्टॉल करने के लिए लिंक में दिए गए निर्देशों का पालन करें।"
+            "**नोट:** उपलब्ध होने पर Spotify के अंतर्निहित बोल उपयोग करता है।"
         ],
         "lyricsAlignment": {
             "setting": "गीत संरेखण",

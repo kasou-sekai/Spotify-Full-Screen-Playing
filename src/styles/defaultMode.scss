@@ -28,7 +28,7 @@
             }
         }
 
-        #fad-lyrics-plus-container {
+        #fad-lyrics-container {
             right: 0;
             left: 0;
             width: 100%;
@@ -48,7 +48,7 @@
                     --fsd-art-max-width: 400px;
                 }
             }
-            #fad-lyrics-plus-container {
+            #fad-lyrics-container {
                 transform: translateY(1000px) scale3d(0.1, 0.1, 0.1);
             }
         }

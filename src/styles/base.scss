@@ -253,7 +253,7 @@
             transform: translateX(0%);
         }
     }
-    #fad-lyrics-plus-container {
+    #fad-lyrics-container {
         transition: transform var(--transition-duration) var(--transition-function);
         position: absolute;
         right: var(--right-margin-lyrics);
@@ -372,7 +372,7 @@
     }
     &.lyrics-unavailable,
     &.lyrics-hide-force {
-        #fad-lyrics-plus-container {
+        #fad-lyrics-container {
             transform: translateX(1000px) scale3d(0.1, 0.1, 0.1) rotate(45deg);
         }
     }

@@ -60,8 +60,7 @@
         "lyricsHeader": "Textinställningar",
         "lyrics": "Text",
         "lyricsDescription": [
-            "**Obs:** Du behöver [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) anpassad app för denna funktion.",
-            "Följ instruktionerna i länken för att installera."
+            "**Obs:** Använder Spotifys inbyggda låttexter när de finns tillgängliga."
         ],
         "lyricsAlignment": {
             "setting": "Textjustering",

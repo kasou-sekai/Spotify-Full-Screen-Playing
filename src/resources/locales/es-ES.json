@@ -24,7 +24,6 @@
         "tvModeConfig": "Configuración del modo TV",
         "fullscreenConfig": "Configuración de pantalla completa",
         "exit": "Salir",
-
         "pluginSettings": "Configuración del complemento",
         "fsHideOriginal": "Ocultar el botón de pantalla completa de Spotify",
         "fsHideOriginalDescription": "Oculta el botón de pantalla completa de Spotify (solo disponible para usuarios **Premium**)",
@@ -61,8 +60,7 @@
         "lyricsHeader": "Configuración de las letras",
         "lyrics": "Letras",
         "lyricsDescription": [
-            "**Nota:** Necesitas la aplicación personalizada [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) para usar esta función.",
-            "Sigue las instrucciones del enlace para instalar la aplicación personalizada."
+            "**Nota:** Usa las letras integradas de Spotify cuando estén disponibles."
         ],
         "lyricsAlignment": {
             "setting": "Alineación de las letras",
@@ -72,7 +70,6 @@
         },
         "autoHideLyrics": "Ocultar las letras automáticamente (cuando no estén disponibles)",
         "lyricsAnimationTempo": "Tempo de la animación de las letras",
-
         "generalHeader": "Configuración general",
         "progressBar": "Barra de progreso",
         "playerControls": "Controles del reproductor",
@@ -88,7 +85,6 @@
         "icons": "Iconos",
         "songChangeAnimation": "Animación de cambio de canción",
         "fullscreen": "Pantalla completa",
-
         "extraHeader": "Funcionalidad adicional",
         "backgroundChoice": {
             "setting": "⭐ Elección de fondo",
@@ -121,7 +117,6 @@
             "never": "Nunca",
             "smart": "Inteligente"
         },
-
         "appearanceHeader": "Apariencia avanzada/Apariencia",
         "appearanceSubHeader": "*(Solo cambia si sabes lo que estás haciendo!)*",
         "backgroundHeader": "Modificaciones de fondo",
@@ -154,9 +149,7 @@
         "upnextTime": "Tiempo de visualización de la lista de reproducción",
         "backgroundBlur": "Desenfoque de fondo",
         "backgroundBrightness": "Brillo de fondo",
-
         "aboutHeader": "Acerca de",
-
         "configReset": "Restablecer configuración",
         "reload": "Recargar cliente"
     },

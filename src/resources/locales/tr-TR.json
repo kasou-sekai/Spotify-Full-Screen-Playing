@@ -60,8 +60,7 @@
         "lyricsHeader": "Şarkı sözleri ayarları",
         "lyrics": "Şarkı sözleri",
         "lyricsDescription": [
-            "**Not:** Bu özelliği kullanmak için [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) özel uygulamasına ihtiyacınız var.",
-            "Özel uygulamayı yüklemek için bağlantıdaki talimatları izleyin."
+            "**Not:** Mevcutsa Spotify'ın yerleşik şarkı sözlerini kullanır."
         ],
         "lyricsAlignment": {
             "setting": "Şarkı sözleri konumu",

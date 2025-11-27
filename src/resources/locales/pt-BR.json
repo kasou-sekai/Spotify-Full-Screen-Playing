@@ -24,7 +24,6 @@
         "tvModeConfig": "Configuração do Modo TV",
         "fullscreenConfig": "Configuração de Tela Cheia",
         "exit": "Sair",
-
         "pluginSettings": "Configurações do Plugin",
         "fsHideOriginal": "Ocultar Botão Padrão",
         "fsHideOriginalDescription": "Oculta o botão de tela cheia padrão do Spotify (disponível para usuários **Premium**)",
@@ -61,8 +60,7 @@
         "lyricsHeader": "Configurações de Letras",
         "lyrics": "Letras",
         "lyricsDescription": [
-            "**Observação:** Você precisa do [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) aplicativo personalizado para usar esse recurso.",
-            "Siga as instruções no link para instalar o aplicativo personalizado."
+            "**Observação:** Usa as letras nativas do Spotify quando disponíveis."
         ],
         "lyricsAlignment": {
             "setting": "Alinhamento de Letras",
@@ -72,7 +70,6 @@
         },
         "autoHideLyrics": "Ocultar Letras Automaticamente (Quando indisponíveis)",
         "lyricsAnimationTempo": "Tempo de Animação das Letras",
-
         "generalHeader": "Configurações Gerais",
         "progressBar": "Barra de Progresso",
         "playerControls": "Controles do Reprodutor",
@@ -88,7 +85,6 @@
         "icons": "Ícones",
         "songChangeAnimation": "Animação de Troca de Música",
         "fullscreen": "Tela Cheia",
-
         "extraHeader": "Funcionalidades Extras",
         "backgroundChoice": {
             "setting": "⭐ Escolha de Fundo",
@@ -121,7 +117,6 @@
             "never": "Nunca",
             "smart": "Inteligente"
         },
-
         "appearanceHeader": "Avançado/Aparência",
         "appearanceSubHeader": "**(Mude apenas se souber o que está fazendo!)*",
         "backgroundHeader": "Modificações de Fundo",
@@ -156,9 +151,7 @@
         "upnextTime": "Tempo para exibição da faixa a seguir",
         "backgroundBlur": "Desfoque do Fundo",
         "backgroundBrightness": "Brilho do Fundo",
-
         "aboutHeader": "Sobre",
-
         "configReset": "Redefinir Configuração",
         "reload": "Recarregar Cliente"
     },

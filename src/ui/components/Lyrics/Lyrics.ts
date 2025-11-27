@@ -2,7 +2,6 @@ import { DOM } from "../../elements";
 import CFM from "../../../utils/config";
 
 type LyricLine = { time: number | null; text: string };
-type LyricSource = "spotify" | "lyrics-plus" | null;
 
 export class Lyrics {
     private static container: HTMLElement | null = null;
@@ -14,7 +13,6 @@ export class Lyrics {
     private static lines: LyricLine[] = [];
     private static activeIndex = -1;
     private static rafId: number | null = null;
-    private static source: LyricSource = null;
     private static resizeObserver: ResizeObserver | null = null;
     private static lastMeasuredFontSize = 0;
 
@@ -30,7 +28,6 @@ export class Lyrics {
         this.lineHeights = [];
         this.containerHeight = 0;
         this.activeIndex = -1;
-        this.source = null;
         this.stopResizeObserver();
         this.lastMeasuredFontSize = 0;
         this.scrollbarThumb = null;
@@ -40,20 +37,6 @@ export class Lyrics {
 
     static toggleLyrics() {
         DOM.container.classList.toggle("lyrics-hide-force");
-    }
-
-    static handleLyricsUpdate(evt: any) {
-        const detail = evt?.detail ?? {};
-        if (detail.isLoading) {
-            this.renderStatus("Loading lyrics…", false);
-            return;
-        }
-        const lines = this.normalizeLines(detail.synced || detail.lines || detail.lyrics);
-        if (!lines.length) {
-            if (this.source !== "spotify") this.renderStatus("Lyrics unavailable", true);
-            return;
-        }
-        this.applyLines(lines, "lyrics-plus");
     }
 
     static async loadLyrics(trackUri?: string) {
@@ -76,7 +59,7 @@ export class Lyrics {
                 this.renderStatus("Lyrics unavailable", true);
                 return;
             }
-            this.applyLines(lines, "spotify");
+            this.applyLines(lines);
         } catch (err) {
             this.renderStatus("Lyrics unavailable", true);
         }
@@ -101,8 +84,7 @@ export class Lyrics {
         this.container.innerHTML = `<div class="lyrics-wrapper"><div class="lyrics-status">${text}</div></div>`;
     }
 
-    private static applyLines(lines: LyricLine[], source: Exclude<LyricSource, null>) {
-        this.source = source;
+    private static applyLines(lines: LyricLine[]) {
         this.lines = lines;
         this.activeIndex = -1;
         DOM.container.classList.remove("lyrics-unavailable");

@@ -24,7 +24,6 @@
         "tvModeConfig": "TV Mode Configuration",
         "fullscreenConfig": "Full Screen Configuration",
         "exit": "Exit",
-
         "pluginSettings": "Plugin Settings",
         "fsHideOriginal": "Hide Stock Button",
         "fsHideOriginalDescription": "Hide the spotify's stock fullscreen button(available to **Premium** users)",
@@ -61,8 +60,7 @@
         "lyricsHeader": "Lyrics Settings",
         "lyrics": "Lyrics",
         "lyricsDescription": [
-            "**Tip:** Uses Spotify's built-in lyrics first; install [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) for an extra source.",
-            "Follow the instructions in the link to install the custom app if you want that fallback."
+            "**Tip:** Uses Spotify's built-in lyrics when available."
         ],
         "lyricsAlignment": {
             "setting": "Lyrics Alignment",
@@ -77,7 +75,6 @@
         },
         "autoHideLyrics": "Auto Hide Lyrics (when unavailable)",
         "lyricsAnimationTempo": "Lyrics Animation Tempo",
-
         "generalHeader": "General Settings",
         "progressBar": "Progress Bar",
         "playerControls": "Player Controls",
@@ -94,7 +91,6 @@
         "icons": "Icons",
         "songChangeAnimation": "Song Change Animation",
         "fullscreen": "Fullscreen",
-
         "extraHeader": "Extra Functionality",
         "backgroundChoice": {
             "setting": "⭐ Background Choice",
@@ -170,9 +166,7 @@
         "upnextTime": "Upnext Time to Show",
         "backgroundBlur": "Background Blur",
         "backgroundBrightness": "Background Brightness",
-
         "aboutHeader": "About",
-
         "configReset": "Reset Config",
         "reload": "Reload Client"
     },

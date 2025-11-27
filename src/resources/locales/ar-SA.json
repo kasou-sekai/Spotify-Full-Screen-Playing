@@ -60,8 +60,7 @@
         "lyricsHeader": "إعدادات الكلمات",
         "lyrics": "الكلمات",
         "lyricsDescription": [
-            "**ملاحظة:** تحتاج إلى تطبيق [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) المخصص لاستخدام هذه الميزة.",
-            "اتبع التعليمات في الرابط لتثبيت التطبيق المخصص."
+            "**ملاحظة:** يتم استخدام كلمات الأغاني المدمجة في Spotify عندما تكون متاحة."
         ],
         "lyricsAlignment": {
             "setting": "محاذاة الكلمات",

@@ -1,21 +1,21 @@
 {
     "langName": "Bahasa Indonesia",
-"context": {
-    "queue": "Memutar dari antrian",
-    "track": "Memutar lagu",
-    "album": "Memutar dari album",
-    "artist": "Memutar dari artis",
-    "playlist": "Memutar dari playlist",
-    "playlistFolder": "Memutar dari folder playlist",
-    "search": "Memutar dari hasil pencarian",
-    "searchDest": "Lagu",
-    "collection": "Memutar dari koleksi",
-    "likedSongs": "Lagu yang disukai",
-    "trackRadio": "Memutar dari trek radio",
-    "artistRadio": "Memutar dari radio artis",
-    "albumRadio": "Memutar dari album radio",
-    "playlistRadio": "Memutar dari playlist radio"
-},
+    "context": {
+        "queue": "Memutar dari antrian",
+        "track": "Memutar lagu",
+        "album": "Memutar dari album",
+        "artist": "Memutar dari artis",
+        "playlist": "Memutar dari playlist",
+        "playlistFolder": "Memutar dari folder playlist",
+        "search": "Memutar dari hasil pencarian",
+        "searchDest": "Lagu",
+        "collection": "Memutar dari koleksi",
+        "likedSongs": "Lagu yang disukai",
+        "trackRadio": "Memutar dari trek radio",
+        "artistRadio": "Memutar dari radio artis",
+        "albumRadio": "Memutar dari album radio",
+        "playlistRadio": "Memutar dari playlist radio"
+    },
     "upnext": "SELANJUTNYA",
     "unknownArtist": "Artis (Tidak Tersedia)",
     "settings": {
@@ -24,7 +24,6 @@
         "tvModeConfig": "Konfigurasi Mode TV",
         "fullscreenConfig": "Konfigurasi Layar Penuh",
         "exit": "Keluar",
-    
         "pluginSettings": "Pengaturan Plugin",
         "fsHideOriginal": "Sembunyikan Tombol Default",
         "fsHideOriginalDescription": "Sembunyikan tombol layar penuh bawaan Spotify (tersedia untuk pengguna **Premium**)",
@@ -61,8 +60,7 @@
         "lyricsHeader": "Pengaturan Lirik",
         "lyrics": "Lirik",
         "lyricsDescription": [
-            "**Catatan:** Anda memerlukan aplikasi kustom [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) untuk menggunakan fitur ini.",
-            "Ikuti petunjuk dalam tautan untuk menginstal aplikasi kustom tersebut."
+            "**Catatan:** Menggunakan lirik bawaan Spotify jika tersedia."
         ],
         "lyricsAlignment": {
             "setting": "Penjajaran Lirik",
@@ -72,7 +70,6 @@
         },
         "autoHideLyrics": "Sembunyikan Lirik Secara Otomatis (saat tidak tersedia)",
         "lyricsAnimationTempo": "Kecepatan Animasi Lirik",
-    
         "generalHeader": "Pengaturan Umum",
         "progressBar": "Progress Bar",
         "playerControls": "Kontrol Pemutar",
@@ -89,7 +86,6 @@
         "icons": "Ikon",
         "songChangeAnimation": "Animasi Perubahan Lagu",
         "fullscreen": "Layar Penuh",
-    
         "extraHeader": "Fungsionalitas Tambahan",
         "backgroundChoice": {
             "setting": "⭐ Pilihan Latar Belakang",
@@ -165,12 +161,10 @@
         "upnextTime": "Waktu Selanjutnya untuk Ditampilkan",
         "backgroundBlur": "Blur Latar Belakang",
         "backgroundBrightness": "Kecerahan Latar Belakang",
-    
         "aboutHeader": "Tentang",
-    
         "configReset": "Atur Ulang Konfigurasi",
         "reload": "Muat Ulang Klien"
-    },    
+    },
     "tvBtnDesc": "Tampilan Mode TV",
     "fullscreenBtnDesc": "Layar Penuh"
 }

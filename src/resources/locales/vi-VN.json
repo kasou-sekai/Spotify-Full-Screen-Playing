@@ -24,7 +24,6 @@
         "tvModeConfig": "Tùy chỉnh chế độ TV",
         "fullscreenConfig": "Tùy chính chế độ toàn màn hình",
         "exit": "Thoát",
-
         "pluginSettings": "Cài đặt Plugin",
         "fsHideOriginal": "Ẩn nút mặc định",
         "fsHideOriginalDescription": "Ẩn nút toàn màn hình mặc định của Spotify (yêu cầu là người dùng **Premium**). Yêu cầu tải lại.",
@@ -61,8 +60,7 @@
         "lyricsHeader": "Cài đặt lời bài hát",
         "lyrics": "Lời bài hát",
         "lyricsDescription": [
-            "**Ghi chú:** Bạn sẽ cần ứng dụng [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) để dùng tính năng này.",
-            "Làm theo các bước trên chỉ dẫn để cài đặt ứng dụng."
+            "**Ghi chú:** Sử dụng lời bài hát tích hợp của Spotify khi có sẵn."
         ],
         "lyricsAlignment": {
             "setting": "Căn chỉnh lời bài hát",
@@ -142,9 +140,7 @@
         "upnextTime": "Thời gian hiện thông báo bài hát tiếp theo",
         "backgroundBlur": "Làm mờ hình nền",
         "backgroundBrightness": "Độ sáng hình nền",
-
         "aboutHeader": "Thông tin",
-
         "configReset": "Đặt lại cài đặt",
         "reload": "Tải lại Client"
     },

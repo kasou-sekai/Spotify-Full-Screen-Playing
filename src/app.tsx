@@ -137,9 +137,6 @@ async function main() {
 
         modifyIsAnimationRunning(false);
 
-        window.dispatchEvent(new Event("fad-request"));
-        window.removeEventListener("lyrics-plus-update", Lyrics.handleLyricsUpdate);
-
         handleMouseMoveDeactivation();
 
         DOM.style.innerHTML = `
@@ -165,7 +162,7 @@ async function main() {
         DOM.artist = DOM.container.querySelector("#fsd-artist span")!;
         DOM.album = DOM.container.querySelector("#fsd-album span")!;
         if (CFM.get("lyricsDisplay")) {
-            DOM.lyrics = DOM.container.querySelector("#fad-lyrics-plus-container")!;
+            DOM.lyrics = DOM.container.querySelector("#fad-lyrics-container")!;
             Lyrics.attach(DOM.lyrics);
         }
 
@@ -482,8 +479,6 @@ async function main() {
         }
         document.querySelector(".Root__top-container")?.append(DOM.style, DOM.container);
         if (CFM.get("lyricsDisplay")) {
-            window.addEventListener("lyrics-plus-update", Lyrics.handleLyricsUpdate);
-            window.dispatchEvent(new Event("fad-request"));
             // hard reset lyric renderer to avoid stale raf state after re-entry
             Lyrics.teardown();
             Lyrics.attach(DOM.lyrics);
@@ -540,10 +535,6 @@ async function main() {
         if (popup) popup.remove();
         DOM.style.remove();
         DOM.container.remove();
-        if (CFM.get("lyricsDisplay")) {
-            window.removeEventListener("lyrics-plus-update", Lyrics.handleLyricsUpdate);
-            window.dispatchEvent(new Event("fad-request"));
-        }
         document.removeEventListener("fullscreenchange", fullScreenListener);
 
         Spicetify.Mousetrap.unbind("f11");

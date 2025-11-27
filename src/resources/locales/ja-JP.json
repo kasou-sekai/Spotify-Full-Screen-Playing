@@ -60,8 +60,7 @@
         "lyricsHeader": "歌詞設定",
         "lyrics": "歌詞",
         "lyricsDescription": [
-            "**注意:** この機能を使用するには [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) カスタムアプリが必要です。",
-            "リンクの指示に従ってインストールしてください。"
+            "**注意:** 利用可能な場合は Spotify の内蔵歌詞を使用します。"
         ],
         "lyricsAlignment": {
             "setting": "歌詞の配置",

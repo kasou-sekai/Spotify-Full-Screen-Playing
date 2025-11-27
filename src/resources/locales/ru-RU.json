@@ -24,7 +24,6 @@
         "tvModeConfig": "Настройки ТВ-режима",
         "fullscreenConfig": "Настройки Полного экрана",
         "exit": "Выход",
-
         "pluginSettings": "Настройки плагина",
         "fsHideOriginal": "Скрыть стоковую кнопку",
         "fsHideOriginalDescription": "Скрывает кнопку Spotify для открытия стокового полноэкранного режима (доступна **Премиум** пользователям). Требуется перезагрузка.",
@@ -61,8 +60,7 @@
         "lyricsHeader": "Настройки текста",
         "lyrics": "Текст трека",
         "lyricsDescription": [
-            "**Внимание:** Требуется приложение [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) для использования этой функции.",
-            "Следуйте инструкциям по ссылке для его установки."
+            "**Внимание:** Используются встроенные тексты Spotify, если они доступны."
         ],
         "lyricsAlignment": {
             "setting": "Выравнивание текста",
@@ -71,7 +69,6 @@
             "right": "По правому краю"
         },
         "lyricsAnimationTempo": "Скорость анимации текста",
-
         "generalHeader": "Основные настройки",
         "progressBar": "Полоса воспроизведения",
         "playerControls": "Элементы управления воспроизведением",
@@ -87,7 +84,6 @@
         "icons": "Иконки",
         "songChangeAnimation": "Анимация переключения трека",
         "fullscreen": "Полный экран",
-
         "extraHeader": "Дополнительные настройки",
         "backgroundChoice": {
             "setting": "Задний фон",
@@ -120,7 +116,6 @@
             "never": "Никогда",
             "smart": "Умный режим"
         },
-
         "appearanceHeader": "Расширенные настройки внешнего вида",
         "appearanceSubHeader": "*(Изменяйте, только если знаете, что делаете!)*",
         "backgroundColor": {
@@ -150,9 +145,7 @@
         "upnextTime": "Время отображения следующего трека",
         "backgroundBlur": "Размытие фона",
         "backgroundBrightness": "Яркость фона",
-
         "aboutHeader": "О расширении",
-
         "configReset": "Сбросить настройки",
         "reload": "Перезагрузить приложение"
     },

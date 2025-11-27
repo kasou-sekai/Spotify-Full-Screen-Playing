@@ -60,8 +60,7 @@
         "lyricsHeader": "การตั้งค่าเนื้อเพลง",
         "lyrics": "เนื้อเพลง",
         "lyricsDescription": [
-            "**หมายเหตุ:** คุณต้องมีแอป [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) เพื่อใช้ฟีเจอร์นี้",
-            "ทำตามคำแนะนำในลิงก์เพื่อติดตั้ง"
+            "**หมายเหตุ:** ใช้เนื้อเพลงในตัวของ Spotify เมื่อมีให้บริการ."
         ],
         "lyricsAlignment": {
             "setting": "การจัดตำแหน่งเนื้อเพลง",

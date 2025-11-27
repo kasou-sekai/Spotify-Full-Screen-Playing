@@ -24,7 +24,6 @@
         "tvModeConfig": "Configuration du mode TV",
         "fullscreenConfig": "Configuration en plein écran",
         "exit": "Quitter",
-
         "pluginSettings": "Paramètres du plugin",
         "fsHideOriginal": "Masquer le bouton d'origine",
         "fsHideOriginalDescription": "Masquez le bouton de plein écran d'origine de Spotify (disponible pour les utilisateurs **Premium**)",
@@ -61,8 +60,7 @@
         "lyricsHeader": "Paramètres des paroles",
         "lyrics": "Paroles",
         "lyricsDescription": [
-            "**Remarque :** Vous avez besoin de l'application personnalisée [lyrics-plus](https://spicetify.app/docs/advanced-usage/custom-apps#lyrics-plus) pour utiliser cette fonctionnalité.",
-            "Suivez les instructions du lien pour installer l'application personnalisée."
+            "**Remarque :** Utilise les paroles intégrées de Spotify lorsqu'elles sont disponibles."
         ],
         "lyricsAlignment": {
             "setting": "Alignement des paroles",
@@ -72,7 +70,6 @@
         },
         "autoHideLyrics": "Masquer automatiquement les paroles (lorsque pas disponibles)",
         "lyricsAnimationTempo": "Tempo de l'animation des paroles",
-
         "generalHeader": "Paramètres généraux",
         "progressBar": "Barre de progression",
         "playerControls": "Contrôles du lecteur",
@@ -88,7 +85,6 @@
         "icons": "Icônes",
         "songChangeAnimation": "Animation de changement de chanson",
         "fullscreen": "Plein écran",
-
         "extraHeader": "Fonctionnalités supplémentaires",
         "backgroundChoice": {
             "setting": "⭐ Choix de l'arrière-plan",
@@ -121,7 +117,6 @@
             "never": "Jamais",
             "smart": "Intelligent"
         },
-
         "appearanceHeader": "Paramètres avancés/Aspect",
         "appearanceSubHeader": "*(À changer uniquement si vous savez ce que vous faites !)*",
         "backgroundHeader": "Modifications de l'arrière-plan",
@@ -154,13 +149,10 @@
         "upnextTime": "Temps pour afficher À suivre",
         "backgroundBlur": "Flou de l'arrière-plan",
         "backgroundBrightness": "Luminosité de l'arrière-plan",
-
         "aboutHeader": "À propos",
-
         "configReset": "Réinitialiser la configuration",
         "reload": "Recharger le client"
     },
     "tvBtnDesc": "Affichage du mode TV",
     "fullscreenBtnDesc": "Plein écran"
 }
-
