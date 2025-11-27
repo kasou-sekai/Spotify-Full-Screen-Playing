@@ -15,6 +15,9 @@ export class Lyrics {
     private static rafId: number | null = null;
     private static resizeObserver: ResizeObserver | null = null;
     private static lastMeasuredFontSize = 0;
+    private static isSynced = false;
+    private static lastStatus: "synced" | "unsynced" | "unavailable" | "loading" = "unavailable";
+    private static lastLines: LyricLine[] = [];
 
     static attach(container: HTMLElement) {
         this.container = container;
@@ -33,6 +36,9 @@ export class Lyrics {
         this.scrollbarThumb = null;
         this.lyricsRoot = null;
         this.container = null;
+        this.isSynced = false;
+        this.lastStatus = "unavailable";
+        this.lastLines = [];
     }
 
     static toggleLyrics() {
@@ -44,6 +50,7 @@ export class Lyrics {
             this.renderStatus("Lyrics unavailable", true);
             return;
         }
+        this.lastStatus = "loading";
         this.renderStatus("Loading lyrics…", false);
         const trackId = trackUri?.split(":").pop();
         if (!trackId) {
@@ -78,6 +85,9 @@ export class Lyrics {
         this.lastMeasuredFontSize = 0;
         this.lyricsRoot = null;
         this.scrollbarThumb = null;
+        this.lastLines = [];
+        this.isSynced = false;
+        this.lastStatus = unavailable ? "unavailable" : "loading";
         if (unavailable) DOM.container.classList.add("lyrics-unavailable");
         else DOM.container.classList.remove("lyrics-unavailable");
         this.stopLoop();
@@ -85,11 +95,21 @@ export class Lyrics {
     }
 
     private static applyLines(lines: LyricLine[]) {
+        const timeValues = lines
+            .map((line) => line.time)
+            .filter((t): t is number => t !== null);
+        const lastTime = timeValues.length ? timeValues[timeValues.length - 1] : null;
+        const hasNonZero = timeValues.some((t) => t > 0);
+        this.isSynced = Boolean(timeValues.length && hasNonZero && (lastTime ?? 0) > 0);
+        this.stopLoop();
         this.lines = lines;
-        this.activeIndex = -1;
+        this.lastLines = lines;
+        this.lastStatus = this.isSynced ? "synced" : "unsynced";
+        this.activeIndex = this.isSynced ? -1 : 0;
         DOM.container.classList.remove("lyrics-unavailable");
+        this.container?.classList.toggle("lyrics-unsynced", !this.isSynced);
         this.renderLines();
-        this.startLoop();
+        if (this.isSynced) this.startLoop();
     }
 
     private static renderLines() {
@@ -114,6 +134,11 @@ export class Lyrics {
         this.lyricsRoot = this.container.querySelector(".rnp-lyrics") as HTMLElement;
         this.scrollbarThumb = this.container.querySelector(".rnp-lyrics-scrollbar-thumb") as HTMLElement;
         this.lineNodes = Array.from(this.container.querySelectorAll<HTMLElement>(".rnp-lyrics-line"));
+        if (!this.isSynced) {
+            this.stopLoop();
+            this.lineNodes.forEach((node, idx) => node.classList.toggle("active", idx === 0));
+            return;
+        }
         this.measureHeights();
         this.applyTransforms(true);
         this.setupResizeObserver();
@@ -134,6 +159,7 @@ export class Lyrics {
     }
 
     private static updateActive() {
+        if (!this.isSynced) return;
         if (!this.container || !this.lines.length) return;
         const progress = Spicetify.Player?.getProgress?.() ?? 0;
         let nextIndex = -1;
@@ -152,6 +178,7 @@ export class Lyrics {
     }
 
     private static applyTransforms(skipAnimation = false) {
+        if (!this.isSynced) return;
         if (!this.lyricsRoot || !this.lineNodes.length) return;
         if (!this.lineHeights.length || this.lineHeights.length !== this.lineNodes.length) {
             this.measureHeights();
@@ -319,5 +346,13 @@ export class Lyrics {
                 return { text, time: Number.isFinite(parsed ?? NaN) ? parsed! : null };
             })
             .filter(Boolean) as LyricLine[];
+    }
+
+    static getDebugInfo() {
+        return {
+            status: this.lastStatus,
+            isSynced: this.isSynced,
+            lines: this.lastLines,
+        };
     }
 }

@@ -15,6 +15,7 @@ import {
     modifyRotationSpeed,
     animateColor,
 } from "../../../utils/animation";
+import { Lyrics } from "../Lyrics/Lyrics";
 
 export class ConfigManager {
     static configContainer: HTMLDivElement;
@@ -192,6 +193,73 @@ export class ConfigManager {
         return settingCard;
     }
 
+    private static formatLyricTime(time: number | null) {
+        if (time === null || !Number.isFinite(time)) return "--:--";
+        const totalSeconds = Math.max(0, Math.floor(time / 1000));
+        const minutes = Math.floor(totalSeconds / 60)
+            .toString()
+            .padStart(2, "0");
+        const seconds = (totalSeconds % 60).toString().padStart(2, "0");
+        return `${minutes}:${seconds}`;
+    }
+
+    private static getLyricsStatusLabel(status: string) {
+        const map: Record<string, string> = {
+            synced: "同步",
+            unsynced: "未同步",
+            unavailable: "无歌词",
+            loading: "加载中",
+        };
+        return map[status] ?? status;
+    }
+
+    private static createLyricsDebugCard() {
+        const { status, lines } = Lyrics.getDebugInfo();
+        const card = document.createElement("div");
+        card.classList.add("setting-card");
+
+        const container = document.createElement("div");
+        container.classList.add("setting-container");
+
+        const header = document.createElement("div");
+        header.classList.add("setting-item");
+        const title = document.createElement("label");
+        title.classList.add("setting-title");
+        title.textContent = "歌词调试";
+        const action = document.createElement("div");
+        action.classList.add("setting-action");
+        action.style.fontWeight = "600";
+        action.textContent = this.getLyricsStatusLabel(status);
+        header.append(title, action);
+
+        const desc = document.createElement("div");
+        desc.classList.add("setting-description");
+
+        const box = document.createElement("div");
+        box.style.background = "var(--secondary-background-color)";
+        box.style.borderRadius = "8px";
+        box.style.padding = "8px 10px";
+        box.style.maxHeight = "260px";
+        box.style.overflow = "auto";
+        box.style.whiteSpace = "pre-wrap";
+        box.style.fontFamily = "monospace";
+        box.style.fontSize = "12px";
+        box.style.lineHeight = "1.45";
+
+        if (lines.length) {
+            box.textContent = lines
+                .map((line, idx) => `[${this.formatLyricTime(line.time)}] (${idx + 1}) ${line.text}`)
+                .join("\n");
+        } else {
+            box.textContent = "暂无歌词数据";
+        }
+
+        desc.append(box);
+        container.append(header, desc);
+        card.append(container);
+        return card;
+    }
+
     static openConfig(evt: Event | null = null): void {
         evt?.preventDefault();
         const LOCALE = CFM.getGlobal("locale") as Config["locale"];
@@ -295,6 +363,7 @@ export class ConfigManager {
                 (value: number) => this.saveOption("lyricsSize", value as unknown as Settings["lyricsSize"]),
                 translations[LOCALE].settings.lyricsSize.description,
             ),
+            this.createLyricsDebugCard(),
             headerText(translations[LOCALE].settings.generalHeader),
             this.createOptions(
                 translations[LOCALE].settings.progressBar,
