@@ -307,7 +307,10 @@
             opacity: 0.55;
         }
         .rnp-lyrics-line > div {
-            transition: opacity 0.4s ease;
+            transition:
+                opacity 0.4s ease,
+                font-weight 0.45s ease,
+                text-shadow 0.45s ease;
             color: var(--tertiary-color);
             white-space: pre-wrap;
         }
@@ -389,7 +392,7 @@
             filter: none !important;
             transition: none !important;
             max-width: calc(100% - 60px);
-            margin: 0 0 clamp(12px, calc(var(--lyrics-base-font-size) * var(--lyrics-font-scale, 1) * 0.7), 32px);
+            margin: 0 0 calc(var(--lyrics-base-font-size) * var(--lyrics-font-scale, 1) * 0.35);
         }
         .rnp-lyrics-scrollbar {
             display: none;
