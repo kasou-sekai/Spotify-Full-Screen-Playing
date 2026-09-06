@@ -328,5 +328,9 @@
         },
         "configReset": "恢復預設"
     },
-    "fullscapeButtonDescription": "Fullscape"
+    "fullscapeButtonDescription": "Fullscape",
+    "cover": {
+        "enlarge": "放大封面",
+        "artwork": "專輯封面"
+    }
 }

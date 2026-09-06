@@ -649,18 +649,6 @@
         border-radius: 8px;
         background-size: cover;
     }
-    #fullscape-art-inner {
-        position: absolute;
-        left: 3%;
-        bottom: 0;
-        width: 94%;
-        height: 94%;
-        z-index: -1;
-        box-shadow:
-            0 0 24px rgba(0, 0, 0, 0.28),
-            0 0 56px rgba(0, 0, 0, 0.16) !important;
-        transform: translateZ(0);
-    }
     #fullscape-artist {
         font-weight: 500;
         color: var(--secondary-color);

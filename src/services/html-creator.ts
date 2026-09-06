@@ -51,8 +51,8 @@ export const getHtmlContent = () => {
 ${CFM.get("lyricsDisplay") ? `<div id="fad-lyrics-container"></div>` : ""}
 <div id="fullscape-foreground">
     <div id="fullscape-art">
-        <div id="fullscape-art-image" class="fullscape-background-fade">
-            <div id="fullscape-art-inner"></div>
+        <div class="fullscape-cover-hitbox">
+            <div id="fullscape-art-image" class="fullscape-background-fade"></div>
         </div>
     </div>
     <div id="fullscape-details">

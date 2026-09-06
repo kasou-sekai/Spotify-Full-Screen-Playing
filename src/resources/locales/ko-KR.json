@@ -275,5 +275,9 @@
         },
         "configReset": "기본값 복원"
     },
-    "fullscapeButtonDescription": "Fullscape"
+    "fullscapeButtonDescription": "Fullscape",
+    "cover": {
+        "enlarge": "커버 확대",
+        "artwork": "앨범 아트"
+    }
 }

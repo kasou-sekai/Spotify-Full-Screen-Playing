@@ -390,5 +390,9 @@
         },
         "configReset": "Restore Defaults"
     },
-    "fullscapeButtonDescription": "Fullscape"
+    "fullscapeButtonDescription": "Fullscape",
+    "cover": {
+        "enlarge": "Enlarge cover",
+        "artwork": "Album artwork"
+    }
 }

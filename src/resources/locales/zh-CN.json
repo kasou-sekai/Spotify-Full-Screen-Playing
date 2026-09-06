@@ -376,5 +376,9 @@
         },
         "configReset": "恢复默认"
     },
-    "fullscapeButtonDescription": "Fullscape"
+    "fullscapeButtonDescription": "Fullscape",
+    "cover": {
+        "enlarge": "放大封面",
+        "artwork": "专辑封面"
+    }
 }

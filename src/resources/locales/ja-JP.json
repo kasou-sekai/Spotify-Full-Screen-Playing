@@ -275,5 +275,9 @@
         },
         "configReset": "デフォルトに戻す"
     },
-    "fullscapeButtonDescription": "Fullscape"
+    "fullscapeButtonDescription": "Fullscape",
+    "cover": {
+        "enlarge": "カバーを拡大",
+        "artwork": "アルバムアート"
+    }
 }

@@ -23,12 +23,14 @@ import { DOM } from "./ui/elements";
 import { ConfigManager } from "./ui/components/Config/Config";
 import { UpNext } from "./ui/components/UpNext/UpNext";
 import { PlayerControls } from "./ui/components/PlayerControls/PlayerControls";
+import { Cover } from "./ui/components/Cover/Cover";
 import { Lyrics } from "./ui/components/Lyrics/Lyrics";
 import { Background } from "./utils/background";
 
 import "./styles/base.scss";
 import "./styles/defaultMode.scss";
 import "./styles/settings.scss";
+import "./ui/components/Cover/styles.scss";
 
 async function startFullscape() {
     let INIT_RETRIES = 0;
@@ -709,6 +711,7 @@ async function startFullscape() {
         if (CFM.get("lyricsDisplay")) {
             Lyrics.teardown();
         }
+        Cover.teardown();
         DOM.container.innerHTML = getHtmlContent();
 
         DOM.back = DOM.container.querySelector("#fullscape-background")!;
@@ -717,6 +720,7 @@ async function startFullscape() {
         DOM.fluidBack = DOM.container.querySelector("#fullscape-fluid-background")!;
 
         DOM.cover = DOM.container.querySelector("#fullscape-art-image")!;
+        Cover.attach();
         DOM.title = DOM.container.querySelector("#fullscape-title-text-track")!;
         DOM.artist = DOM.container.querySelector("#fullscape-artist .fullscape-artist-list")!;
         DOM.album = DOM.container.querySelector("#fullscape-album span")!;
@@ -849,6 +853,7 @@ async function startFullscape() {
         DOM.coverImg.onload = () => {
             if (sequence !== infoSequence) return;
             DOM.cover.style.backgroundImage = `url("${DOM.coverImg.src}")`;
+            Cover.updateImage();
             DOM.title.innerText = songName || "";
             DOM.title.setAttribute("uri", Spicetify.Player.data?.item?.uri || "");
 
@@ -967,6 +972,7 @@ async function startFullscape() {
     let activationSequence = 0;
 
     async function activate() {
+        Cover.attach();
         const sequence = ++activationSequence;
         Utils.toggleQueuePanel(null, true);
         document.body.classList.add(...CLASSES_TO_ADD);
@@ -1052,6 +1058,7 @@ async function startFullscape() {
     }
 
     async function deactivate() {
+        Cover.teardown();
         activationSequence += 1;
         infoSequence += 1;
         cancelPlaybackTimelineResync();
